@@ -12,7 +12,7 @@ class Student(Model):
 
 students = [
     {'username':'karanjoshi','points':31},
-    {'username':'swaggyp','points':699},
+    {'username':'swaggyp','points':3},
     {'username':'charles','points':69},
     {'username':'hombre','points':54},
     {'username':'richard','points':21},
@@ -29,6 +29,10 @@ def add_students():
         except IntegrityError:
             student_record = Student.get(username=student['username'])
             student_record.points = student['points']
+
+            if student_record.points != student['points']:
+                student_record.save(points = student['points']).where(username=student['username'])
+
             student_record.save()
 
 
